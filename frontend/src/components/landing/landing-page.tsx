@@ -177,8 +177,13 @@ export default function LandingPage() {
 
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${scrollY > 50
+<<<<<<< HEAD
         ? 'bg-slate-900/95 backdrop-blur-xl shadow-2xl border-b border-white/10'
         : 'bg-transparent'
+=======
+          ? 'bg-slate-900/95 backdrop-blur-xl shadow-2xl border-b border-white/10'
+          : 'bg-transparent'
+>>>>>>> 78b6fb3 (updated the footer section)
         }`}>
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-20">
@@ -206,8 +211,13 @@ export default function LandingPage() {
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className={`relative text-sm font-medium transition-all duration-300 hover:scale-105 ${activeSection === item.id
+<<<<<<< HEAD
                     ? 'text-cyan-400'
                     : 'text-gray-300 hover:text-white'
+=======
+                      ? 'text-cyan-400'
+                      : 'text-gray-300 hover:text-white'
+>>>>>>> 78b6fb3 (updated the footer section)
                     }`}
                 >
                   {item.label}
@@ -464,7 +474,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Section area*/}
       <section id="services" className="py-32 px-6 bg-gradient-to-b from-slate-900/50 to-transparent relative">
         <div className="container mx-auto">
           <div className={`text-center mb-20 ${isVisible.services ? 'animate-fade-in-up' : 'opacity-0'}`} data-animate id="services">
