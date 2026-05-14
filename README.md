@@ -1,3 +1,4 @@
+
 # 🧠 CuraGenie - AI-Powered Healthcare Platform
 
 **Transform your healthcare experience with intelligent medical insights**
@@ -114,3 +115,6 @@ This platform is for educational and research purposes only. Always consult with
 ---
 
 Built with ❤️ for advancing personalized healthcare through AI and genomics.
+## Contributing
+
+Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before contributing.
