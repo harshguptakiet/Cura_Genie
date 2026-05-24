@@ -757,53 +757,138 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-6 bg-slate-900/80 backdrop-blur-xl border-t border-white/10 relative">
-        <div className="container mx-auto">
-          <div className="text-center space-y-6">
-            {/* Logo */}
-            <div className="flex items-center justify-center space-x-3 group">
-              <Brain className="h-12 w-12 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300" />
-              <span className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                CuraGenie
-              </span>
-            </div>
-            
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              Revolutionizing healthcare through advanced AI technology and personalized medicine. 
-              Built with ❤️ for a healthier tomorrow.
-            </p>
-            
-            {/* Social Links */}
-            <div className="flex justify-center space-x-6">
-              {[
-                { icon: Mail, label: "Email", href: "mailto:guptasecularharsh@gmail.com" },
-                { icon: Phone, label: "Phone", href: "tel:+918081434149" },
-                { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/harsh-gupta-kiet/" }
-              ].map((social, index) => (
-                <div 
-                  key={index} 
-                  className="w-12 h-12 rounded-full bg-slate-700/50 flex items-center justify-center cursor-pointer hover:bg-cyan-500/20 hover:text-cyan-400 transition-all duration-300 hover:scale-110 glow-subtle"
-                  onClick={() => window.open(social.href, '_blank', 'noopener,noreferrer')}
-                >
-                  <social.icon className="h-6 w-6 text-gray-400 hover:text-cyan-400" />
-                </div>
-              ))}
-            </div>
-            
-            {/* Copyright */}
-            <div className="border-t border-slate-700/50 pt-8 space-y-2">
-              <p className="text-gray-400 text-lg">
-                © 2025 CuraGenie - Developed by 
-                <span className="text-cyan-400 font-semibold"> Harsh Gupta</span>. 
-                All rights reserved.
-              </p>
-              <p className="text-gray-500 text-sm">
-                Built with cutting-edge technology: React, Next.js, TypeScript & AI/ML
-              </p>
-            </div>
-          </div>
+      {/* Footer */}
+<footer className="py-20 px-6 bg-slate-900/95 backdrop-blur-xl border-t border-white/10 relative">
+  <div className="container mx-auto">
+
+    {/* Top Grid */}
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+      {/* Brand Section */}
+      <div className="space-y-6">
+        <div className="flex items-center space-x-3">
+          <Brain className="h-10 w-10 text-cyan-400" />
+          <span className="text-2xl font-bold text-white">CuraGenie</span>
         </div>
-      </footer>
+
+        <p className="text-gray-400 text-sm leading-relaxed">
+          Transforming healthcare with AI-powered diagnostics, real-time monitoring,
+          and personalized insights for a smarter medical future.
+        </p>
+
+        <div className="flex space-x-4">
+          {[
+            { icon: Mail, link: "mailto:guptasecularharsh@gmail.com" },
+            { icon: Phone, link: "tel:+918081434149" },
+            { icon: Linkedin, link: "https://linkedin.com/in/harsh-gupta-kiet/" }
+          ].map((item, i) => (
+            <div
+              key={i}
+              onClick={() => window.open(item.link, "_blank")}
+              className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center cursor-pointer hover:bg-cyan-500/20 hover:scale-110 transition-all duration-300"
+            >
+              <item.icon className="h-5 w-5 text-gray-400 hover:text-cyan-400" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Quick Links */}
+      <div>
+        <h4 className="text-white font-semibold mb-6 text-lg">Quick Links</h4>
+        <ul className="space-y-3 text-gray-400">
+          {[
+            { label: "Home", id: "home" },
+            { label: "Features", id: "features" },
+            { label: "Services", id: "services" },
+            { label: "About", id: "stats" },
+            { label: "Contact", id: "contact" }
+          ].map((item, i) => (
+            <li
+              key={i}
+              onClick={() => scrollToSection(item.id)}
+              className="cursor-pointer hover:text-cyan-400 transition-all duration-300 hover:translate-x-1"
+            >
+              {item.label}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Platform */}
+      <div>
+        <h4 className="text-white font-semibold mb-6 text-lg">Platform</h4>
+        <ul className="space-y-3 text-gray-400">
+          {[
+            "AI Diagnostics",
+            "Health Dashboard",
+            "Real-time Monitoring",
+            "Mobile App",
+            "Security & Privacy"
+          ].map((item, i) => (
+            <li
+              key={i}
+              className="cursor-pointer hover:text-cyan-400 transition-all duration-300 hover:translate-x-1"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Newsletter */}
+      <div>
+        <h4 className="text-white font-semibold mb-6 text-lg">Stay Updated</h4>
+
+        <p className="text-gray-400 text-sm mb-4">
+          Get product updates and healthcare insights directly to your inbox.
+        </p>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            const email = new FormData(e.currentTarget).get("email")
+            toast.success("Subscribed successfully!", {
+              description: `${email} added to newsletter`,
+            })
+            e.currentTarget.reset()
+          }}
+          className="flex"
+        >
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="Enter email"
+            className="w-full px-4 py-3 rounded-l-xl bg-slate-800 border border-slate-700 text-white placeholder-gray-400 focus:outline-none focus:border-cyan-400"
+          />
+          <button
+            type="submit"
+            className="px-4 bg-cyan-500 hover:bg-cyan-400 rounded-r-xl transition-all duration-300"
+          >
+            <ArrowRight className="h-5 w-5 text-white" />
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    {/* Bottom Section */}
+    <div className="border-t border-slate-700/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+
+      <p className="text-gray-400 text-sm text-center md:text-left">
+        © 2025 CuraGenie. All rights reserved.
+      </p>
+
+      <div className="flex gap-6 text-sm text-gray-400">
+        <span className="hover:text-cyan-400 cursor-pointer">Privacy Policy</span>
+        <span className="hover:text-cyan-400 cursor-pointer">Terms of Service</span>
+        <span className="hover:text-cyan-400 cursor-pointer">Security</span>
+      </div>
+
+    </div>
+  </div>
+</footer>
 
       {/* Custom Styles */}
       <style jsx global>{`
@@ -982,6 +1067,87 @@ export default function LandingPage() {
         ::-webkit-scrollbar-thumb:hover {
           background: rgba(34, 211, 238, 0.7);
         }
+
+
+        /* ===== FOOTER ENHANCEMENTS ===== */
+
+/* Subtle gradient border line */
+      footer {
+        position: relative;
+      }
+
+      footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 10%;
+        width: 80%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(34,211,238,0.6), transparent);
+      }
+
+      /* Hover glow for links */
+      footer ul li {
+        position: relative;
+      }
+
+      footer ul li::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0%;
+        height: 1px;
+        background: #22d3ee;
+        transition: width 0.3s ease;
+      }
+
+      footer ul li:hover::after {
+       width: 100%;
+      }
+
+      /* Social icon glow */
+      footer .social-icon {
+        box-shadow: 0 0 0px rgba(34,211,238,0);
+      }
+
+      footer .social-icon:hover {
+        box-shadow: 0 0 15px rgba(34,211,238,0.5);
+    }
+
+      /* Newsletter input focus glow */
+      footer input:focus {
+      box-shadow: 0 0 10px rgba(34,211,238,0.3);
+      }
+
+    /* Button hover glow */
+      footer button:hover {
+      box-shadow: 0 0 15px rgba(34,211,238,0.5);
+    }
+
+/* Smooth fade-in animation */
+    @keyframes footer-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+
+    footer {
+      animation: footer-fade-in 0.8s ease-out;
+    }
+
+      /* Better mobile spacing */
+    @media (max-width: 768px) {
+      footer {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    }
       `}</style>
     </div>
   )
