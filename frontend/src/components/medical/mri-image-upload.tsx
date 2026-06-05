@@ -252,6 +252,7 @@ export function MRIImageUpload({ onUploadSuccess, onImageProcessed, onCompleteAn
               accept=".dcm,.dicom,.jpg,.jpeg,.png,.tif,.tiff,.bmp,image/*,application/dicom"
               onChange={handleFileSelect}
               multiple
+              title="Upload MRI images"
               className="hidden"
             />
           </div>
@@ -333,6 +334,12 @@ export function MRIImageUpload({ onUploadSuccess, onImageProcessed, onCompleteAn
                         {uploadedFile.analysisResult.detected_regions?.length || 0} region(s) detected • 
                         Confidence: {((uploadedFile.analysisResult.overall_confidence || 0) * 100).toFixed(1)}%
                       </div>
+                      {uploadedFile.analysisResult.binary_classification?.class_probabilities && (
+                        <div className="text-xs text-green-700 mt-1">
+                          YES: {((uploadedFile.analysisResult.binary_classification.class_probabilities.yes_tumor || 0) * 100).toFixed(2)}% • 
+                          NO: {((uploadedFile.analysisResult.binary_classification.class_probabilities.no_tumor || 0) * 100).toFixed(2)}%
+                        </div>
+                      )}
                       {/* Visualization Display */}
                       {uploadedFile.analysisResult.annotated_image && (
                         <div className="mt-2">
@@ -342,8 +349,7 @@ export function MRIImageUpload({ onUploadSuccess, onImageProcessed, onCompleteAn
                           <img
                             src={uploadedFile.analysisResult.annotated_image}
                             alt="Annotated MRI Analysis"
-                            className="w-full max-w-xs rounded border border-green-300 shadow-sm"
-                            style={{ maxHeight: '200px', objectFit: 'contain' }}
+                            className="w-full max-w-xs max-h-[200px] object-contain rounded border border-green-300 shadow-sm"
                           />
                           <div className="text-xs text-green-600 mt-1">
                             Detected regions highlighted with bounding boxes

@@ -106,3 +106,23 @@ def get_current_active_patient(current_user: User = Depends(get_current_user)) -
             detail="Not enough permissions"
         )
     return current_user
+
+
+def get_current_active_doctor(current_user: User = Depends(get_current_user)) -> User:
+    """Get current active doctor user"""
+    if current_user.role.value != "doctor":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Doctor role required"
+        )
+    return current_user
+
+
+def get_current_medical_expert(current_user: User = Depends(get_current_user)) -> User:
+    """Get current medical expert (doctor or admin)"""
+    if current_user.role.value not in ("doctor", "admin"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Doctor or admin role required"
+        )
+    return current_user
