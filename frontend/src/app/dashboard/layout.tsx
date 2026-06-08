@@ -4,7 +4,7 @@ import React from 'react';
 import { ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, BarChart3, FileText, Stethoscope, Settings, Users, Timeline, Bot, Shield, HelpCircle } from 'lucide-react';
+import { Home, BarChart3, FileText, Stethoscope, Settings, Users, Timeline, Bot, Shield, HelpCircle, UserCircle } from 'lucide-react';
 import { ProtectedRoute } from '@/components/auth/protected-route';
 import { UserMenu } from '@/components/auth/user-menu';
 
@@ -43,6 +43,11 @@ const navigationItems = [
     href: '/dashboard/privacy-policy',
     icon: Shield,
   },
+  {
+  name: 'Profile',
+  href: '/dashboard/profile',
+  icon: UserCircle,
+},
 ];
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
@@ -99,7 +104,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                  pathname === '/dashboard/chatbot' ? 'AI Health Assistant' :
                  pathname === '/dashboard/reports' ? 'Health Reports' :
                  pathname === '/dashboard/privacy-policy' ? 'Privacy Policy' :
-                 pathname.includes('/dashboard/settings') ? 'Settings' : 'Dashboard'}
+                 pathname.includes('/dashboard/settings') ? 'Settings' :
+                 pathname === '/dashboard/profile' ? 'My Profile' : 'Dashboard'}
               </h2>
               <UserMenu />
             </div>
