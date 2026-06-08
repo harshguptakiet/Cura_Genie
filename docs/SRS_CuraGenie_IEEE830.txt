@@ -1,0 +1,397 @@
+# Software Requirements Specification (SRS)
+## CuraGenie
+
+**Standard:** IEEE 830-inspired structure  
+**Version:** 2.0 (Product Specification Edition)  
+**Date:** 2026-02-24  
+**Status:** Draft for Stakeholder Review
+
+---
+
+## Revision History
+
+| Version | Date       | Author         | Description |
+|--------:|------------|----------------|-------------|
+| 2.0     | 2026-02-24 | GitHub Copilot | Reframed into IEEE-style, product-centric SRS using repository context but expanded with best-practice requirements |
+
+---
+
+## Table of Contents
+
+1. Introduction  
+2. Overall Description  
+3. Specific Requirements  
+4. External Interface Requirements  
+5. System Features (Detailed Functional Requirements)  
+6. Non-Functional Requirements  
+7. Data Requirements  
+8. Compliance, Safety, and Ethical Requirements  
+9. Verification and Acceptance Criteria  
+10. Assumptions, Dependencies, and Risks  
+11. Appendix
+
+---
+
+## 1. Introduction
+
+### 1.1 Purpose
+This document specifies the functional and non-functional requirements for **CuraGenie**, an intelligent digital health platform designed to support genomic interpretation, medical imaging analysis, AI-assisted education, and personalized health insights.
+
+The purpose of this SRS is to provide a clear contractual baseline for:
+- Product planning and roadmap alignment
+- Engineering implementation
+- Quality assurance and test design
+- Security and compliance review
+- Deployment and operations readiness
+
+### 1.2 Scope
+CuraGenie provides end-to-end patient and clinician-facing capabilities including:
+- User identity and secure access workflows
+- Genomic data ingestion and analysis
+- Polygenic risk scoring and interpretation
+- MRI-based AI analysis workflows
+- Conversational assistant for health education
+- Dashboard, timelines, and report generation
+
+The product is intended as a **clinical decision-support and educational platform**, not a replacement for licensed medical diagnosis or treatment.
+
+### 1.3 Intended Audience
+- Product Owners and Stakeholders
+- Frontend, Backend, and Data Engineers
+- QA Engineers and Test Architects
+- DevOps/SRE Engineers
+- Security, Privacy, and Compliance Teams
+- Clinical Advisors and Medical Reviewers
+
+### 1.4 Definitions, Acronyms, and Abbreviations
+- **AI**: Artificial Intelligence
+- **API**: Application Programming Interface
+- **FASTQ**: Text-based sequencing read format
+- **JWT**: JSON Web Token
+- **LLM**: Large Language Model
+- **MRI**: Magnetic Resonance Imaging
+- **PHI**: Protected Health Information
+- **PRS**: Polygenic Risk Score
+- **SRS**: Software Requirements Specification
+- **VCF**: Variant Call Format
+
+### 1.5 References
+- IEEE 830 recommended SRS organization
+- Modern web architecture patterns for healthcare SaaS products
+- General secure software development and privacy-by-design principles
+
+---
+
+## 2. Overall Description
+
+### 2.1 Product Perspective
+CuraGenie is a modular, service-oriented web platform composed of:
+- A browser-based frontend application
+- A backend API service for business logic and orchestration
+- Storage and processing components for uploads and analytical outputs
+- Optional asynchronous workers for heavy tasks
+- Optional LLM provider integrations
+
+### 2.2 Product Vision
+Enable users to transform complex genomic and medical imaging inputs into understandable, actionable, and safe health insights through AI-supported workflows.
+
+### 2.3 User Classes and Characteristics
+1. **Patient Users**
+   - Upload clinical/genomic files
+   - View analysis results and recommendations
+   - Interact with AI assistant
+
+2. **Clinical Users (Doctor/Provider)**
+   - Review patient-level summaries and trends
+   - Use outputs as supportive interpretation artifacts
+
+3. **Administrative/Operations Users**
+   - Manage system operations, configurations, and reliability controls
+
+### 2.4 Operating Environment
+- Web browsers (latest stable versions of Chrome, Edge, Firefox, Safari)
+- Server runtime capable of hosting API + worker services
+- Containerized deployment environment strongly recommended
+- Configurable support for local development and production cloud environments
+
+### 2.5 Design and Implementation Constraints
+- Security and privacy controls must be applied for health-related data
+- Long-running analytics should not block interactive user flows
+- AI outputs must be explicitly framed as educational/supportive
+- Configuration must be environment-driven (no hardcoded secrets)
+
+### 2.6 User Documentation
+The product shall include:
+- End-user onboarding instructions
+- Upload format guidance and troubleshooting
+- Deployment and operations documentation
+- Release notes for major feature updates
+
+### 2.7 Assumptions and Dependencies
+- Reliable network access between client and backend
+- Valid credentials and environment settings for external integrations
+- Sufficient storage and compute for processing workflows
+
+---
+
+## 3. Specific Requirements
+
+### 3.1 Requirements Notation
+Each requirement is uniquely identified as:
+- **FR-xxx** for Functional Requirements
+- **NFR-xxx** for Non-Functional Requirements
+- **SR-xxx** for Safety/Regulatory-related Requirements
+
+### 3.2 Priority Levels
+- **P1 (Critical):** Required for production launch
+- **P2 (Important):** Required for stable product maturity
+- **P3 (Enhancement):** Valuable but deferrable
+
+---
+
+## 4. External Interface Requirements
+
+### 4.1 User Interfaces
+**REQ-UI-001 (P1):** The system shall provide responsive web interfaces for desktop and mobile viewport classes.  
+**REQ-UI-002 (P1):** The system shall provide dedicated flows for authentication, dashboard viewing, analysis visualization, chatbot interaction, and report access.  
+**REQ-UI-003 (P2):** The system shall provide role-appropriate views for patient and clinician contexts.  
+**REQ-UI-004 (P2):** The system shall present clear loading, processing, and error states for long-running analyses.
+
+### 4.2 Software Interfaces
+**REQ-SW-001 (P1):** The platform shall expose versioned HTTP APIs for all core domain operations.  
+**REQ-SW-002 (P1):** The platform shall support token-based authentication for protected resources.  
+**REQ-SW-003 (P2):** The platform shall support optional asynchronous processing through task queues/workers.  
+**REQ-SW-004 (P2):** The platform shall support optional third-party AI provider interfaces with graceful fallback behavior.
+
+### 4.3 Communication Interfaces
+**REQ-COM-001 (P1):** The system shall use secure HTTP transport in production environments.  
+**REQ-COM-002 (P2):** The system should support WebSocket (or equivalent) for real-time status/event updates.
+
+---
+
+## 5. System Features (Detailed Functional Requirements)
+
+## 5.1 Identity and Access Management
+
+**FR-001 (P1):** Users shall be able to register with unique identity attributes.  
+**FR-002 (P1):** Users shall authenticate and receive session credentials/tokens.  
+**FR-003 (P1):** Authenticated users shall retrieve their own profile and session context.  
+**FR-004 (P2):** Users shall be able to update profile and account preferences.  
+**FR-005 (P2):** Password recovery and account verification flows shall be supported.
+
+## 5.2 Genomic Data Ingestion
+
+**FR-006 (P1):** The system shall accept supported genomic file formats (including VCF-family and FASTQ-family).  
+**FR-007 (P1):** The system shall validate file types and reject unsupported formats with actionable errors.  
+**FR-008 (P1):** The system shall store upload metadata and processing state transitions.  
+**FR-009 (P2):** The system should support background processing for uploaded genomic files.
+
+## 5.3 Genomic Interpretation and Variant Exploration
+
+**FR-010 (P1):** The system shall extract and persist analyzable genomic signal/variant outputs from valid inputs.  
+**FR-011 (P1):** The system shall provide user-level retrieval of genomic variants and analysis summaries.  
+**FR-012 (P2):** The system should provide visualization-ready data structures for genome-browser style exploration.
+
+## 5.4 Polygenic Risk Scoring (PRS)
+
+**FR-013 (P1):** The system shall compute disease-specific PRS values from genomic data using configured logic.  
+**FR-014 (P1):** The system shall persist PRS outputs with timestamps and disease labels.  
+**FR-015 (P1):** The system shall provide user-level PRS retrieval APIs for display and analytics.  
+**FR-016 (P2):** The system should provide deduplicated/latest-score views for dashboard consumption.
+
+## 5.5 MRI Analysis
+
+**FR-017 (P1):** The system shall accept MRI image uploads in supported image formats.  
+**FR-018 (P1):** The system shall validate basic image integrity and size constraints prior to analysis.  
+**FR-019 (P1):** The system shall persist MRI analysis requests and status lifecycle states.  
+**FR-020 (P2):** The system should return analysis insights including confidence/risk indicators where available.
+
+## 5.6 AI Assistant and Conversational Guidance
+
+**FR-021 (P1):** The system shall provide a conversational interface for user health/genomics questions.  
+**FR-022 (P1):** The system shall incorporate available user context (e.g., PRS/variants) into responses where permitted.  
+**FR-023 (P1):** The system shall disclose that responses are educational/supportive and not definitive diagnosis.  
+**FR-024 (P2):** The system should include service health indicators and fallback response behavior.
+
+## 5.7 Dashboard, Timeline, and Insights
+
+**FR-025 (P1):** The system shall present a consolidated dashboard summarizing upload, analysis, and risk status.  
+**FR-026 (P1):** The system shall maintain an activity timeline for key user events.  
+**FR-027 (P2):** The system should provide recommendations and trend-focused summaries over time.
+
+## 5.8 Reports
+
+**FR-028 (P1):** The system shall generate structured health/genomics reports linked to user analysis artifacts.  
+**FR-029 (P1):** The system shall provide report list and detail retrieval for authorized users.  
+**FR-030 (P1):** The system shall support downloadable report payloads in at least one machine-readable format.  
+**FR-031 (P3):** The system may support additional export formats (e.g., PDF/HTML) in later releases.
+
+## 5.9 Operational and Diagnostic Features
+
+**FR-032 (P1):** The system shall expose service health endpoints for backend and frontend checks.  
+**FR-033 (P2):** The system should expose debug/admin diagnostics in controlled environments only.
+
+---
+
+## 6. Non-Functional Requirements
+
+## 6.1 Security
+
+**NFR-001 (P1):** Sensitive configuration and credentials shall be managed through environment-based secret handling.  
+**NFR-002 (P1):** Protected resources shall require authenticated access.  
+**NFR-003 (P1):** Passwords shall be stored using secure one-way hashing in persisted auth flows.  
+**NFR-004 (P1):** Input validation shall be applied to file uploads and user-provided fields.  
+**NFR-005 (P2):** Security headers and strict CORS settings shall be enforced in production.
+
+## 6.2 Privacy
+
+**NFR-006 (P1):** Personal and health-related data shall be processed with privacy-by-design principles.  
+**NFR-007 (P1):** Access to user data shall be constrained by authorization checks.  
+**NFR-008 (P2):** Data minimization and retention controls should be configurable by environment/policy.
+
+## 6.3 Performance
+
+**NFR-009 (P1):** User-interactive APIs should return within acceptable latency under nominal load.  
+**NFR-010 (P1):** Long-running tasks shall be asynchronous where feasible to preserve UI responsiveness.  
+**NFR-011 (P2):** Frontend routes shall be optimized for production builds and static/dynamic rendering efficiency.
+
+## 6.4 Reliability and Availability
+
+**NFR-012 (P1):** The system shall provide readiness/health checks for deployment orchestration.  
+**NFR-013 (P1):** Core service components shall restart safely after transient failures.  
+**NFR-014 (P2):** Data processing tasks should be retriable where idempotency permits.
+
+## 6.5 Scalability
+
+**NFR-015 (P2):** Architecture should allow separate scaling of frontend, backend, and worker tiers.  
+**NFR-016 (P2):** Storage and queue components should support growth in concurrent analyses and uploads.
+
+## 6.6 Maintainability
+
+**NFR-017 (P1):** The system shall maintain modular separation of concerns across API, domain logic, data models, and UI.  
+**NFR-018 (P2):** The system should provide clear API documentation and operational runbooks.  
+**NFR-019 (P2):** Feature flags/configuration toggles should support safe progressive rollout.
+
+## 6.7 Usability
+
+**NFR-020 (P1):** The UI shall communicate process states clearly (pending, processing, completed, failed).  
+**NFR-021 (P2):** Critical actions should include clear confirmation and error recovery guidance.
+
+## 6.8 Portability
+
+**NFR-022 (P1):** The platform shall support containerized deployment targets.  
+**NFR-023 (P2):** The platform should support local development and cloud deployment with minimal config changes.
+
+---
+
+## 7. Data Requirements
+
+### 7.1 Core Data Domains
+- User Identity and Profile Data
+- Uploaded Clinical/Genomic/MRI Artifacts
+- Analytical Outputs (PRS, MRI analysis results)
+- Timeline Events and Dashboard Aggregates
+- Reports and Recommendations
+
+### 7.2 Data Quality Requirements
+**DR-001 (P1):** Uploaded artifacts shall include traceable metadata (source, timestamp, processing status).  
+**DR-002 (P1):** Analytical results shall include provenance references to source uploads.  
+**DR-003 (P2):** The system should enforce schema consistency across report and analytics payloads.
+
+### 7.3 Data Lifecycle Requirements
+**DR-004 (P2):** The system should support user-initiated deletion for selected personal artifacts where policy allows.  
+**DR-005 (P2):** The system should support retention policy controls for operational and compliance needs.
+
+---
+
+## 8. Compliance, Safety, and Ethical Requirements
+
+**SR-001 (P1):** The product shall present a clear medical disclaimer that outputs do not replace professional care.  
+**SR-002 (P1):** AI-generated content shall avoid definitive diagnosis language unless clinically validated and approved.  
+**SR-003 (P1):** The system shall provide transparent messaging when data is incomplete, uncertain, or unavailable.  
+**SR-004 (P2):** The system should maintain auditable activity logs for critical user and processing events.  
+**SR-005 (P2):** The product should support future alignment with applicable healthcare/privacy frameworks.
+
+---
+
+## 9. Verification and Acceptance Criteria
+
+### 9.1 Functional Acceptance
+The release is functionally acceptable when:
+1. Users can authenticate and access role-appropriate interfaces.
+2. Supported genomic/MRI files can be uploaded and processed with visible status progression.
+3. PRS and analysis results are retrievable and displayed in dashboards/visualizations.
+4. Reports can be generated and accessed by authorized users.
+5. AI assistant interactions are available and include safety framing.
+
+### 9.2 Non-Functional Acceptance
+The release is non-functionally acceptable when:
+1. Health checks pass for all required runtime services.
+2. Protected endpoints enforce authentication.
+3. Production configuration excludes hardcoded secrets and uses environment variables.
+4. Core user flows complete without blocking failures under nominal load.
+
+### 9.3 Test Categories
+- Unit tests for domain logic and validators
+- Integration tests for API contracts and persistence
+- End-to-end tests for key user journeys
+- Security checks for auth/access boundaries
+- Performance smoke tests for critical endpoints
+
+---
+
+## 10. Assumptions, Dependencies, and Risks
+
+### 10.1 Assumptions
+- Users provide data in valid formats and permissible legal contexts.
+- Deployment environments provide required compute, storage, and network resources.
+
+### 10.2 Dependencies
+- Runtime framework dependencies for web/API processing
+- Optional AI providers and credentials
+- Optional message broker/worker stack for asynchronous analytics
+
+### 10.3 Risks and Mitigations
+1. **Risk:** Incomplete/low-quality input data may produce low-confidence outputs.  
+   **Mitigation:** Validation, confidence indicators, and transparent user messaging.
+
+2. **Risk:** Third-party AI provider downtime.  
+   **Mitigation:** Provider fallback strategy and graceful degradation.
+
+3. **Risk:** Misinterpretation of AI-generated health advice.  
+   **Mitigation:** Mandatory disclaimers and clinician-consult prompts.
+
+4. **Risk:** Growth in processing demand affecting latency.  
+   **Mitigation:** Async processing, queueing, and horizontal scaling strategy.
+
+---
+
+## 11. Appendix
+
+### 11.1 Suggested Future Enhancements
+- Fine-grained RBAC matrix and policy-driven authorization engine
+- Rich clinician collaboration workflows
+- Advanced explainability overlays for PRS and imaging outputs
+- Multi-language support for patient-facing content
+- Compliance automation and audit-report exports
+
+### 11.2 Requirement Traceability Template (Starter)
+
+| Requirement ID | Test Case ID | Module/Service | Priority | Status |
+|----------------|--------------|----------------|----------|--------|
+| FR-001         | TC-AUTH-001  | Identity       | P1       | Planned |
+| FR-013         | TC-PRS-001   | Genomics/PRS   | P1       | Planned |
+| FR-017         | TC-MRI-001   | MRI            | P1       | Planned |
+| FR-021         | TC-CHAT-001  | Chatbot        | P1       | Planned |
+| NFR-001        | TC-SEC-001   | Platform       | P1       | Planned |
+
+---
+
+## Approval
+
+| Role | Name | Signature | Date |
+|------|------|-----------|------|
+| Product Owner |  |  |  |
+| Engineering Lead |  |  |  |
+| QA Lead |  |  |  |
+| Security/Compliance Lead |  |  |  |

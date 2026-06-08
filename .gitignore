@@ -1,11 +1,22 @@
 # Dependencies
 node_modules/
 */node_modules/
+**/node_modules/
 **/__pycache__/
 *.pyc
 *.pyo
 *.pyd
 .Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+.virtualenv
 
 # Production builds
 .next/
@@ -109,18 +120,48 @@ temp/
 ehthumbs.db
 Thumbs.db
 
-# Uploads and user data
+# ============================================
+# UPLOADS & USER DATA
+# ============================================
 uploads/
-*/uploads/
+**/uploads/**
+!**/uploads/.gitkeep
 user_data/
+*.vcf
+*.fastq
+*.fq
+!backend/test_data/*.vcf
 
-# ML Models (too large)
+# ============================================
+# ML MODELS (Too Large for Git)
+# ============================================
 *.h5
 *.pkl
 *.model
 *.bin
+*.weights
 models/
-*/models/
+**/models/**
+
+# ============================================
+# BRAIN TUMOR DETECTION - EXCLUDE LARGE DATA
+# ============================================
+Brain-Tumor-Detection/.git/
+Brain-Tumor-Detection/augmented data/
+Brain-Tumor-Detection/logs/
+Brain-Tumor-Detection/yes/
+Brain-Tumor-Detection/no/
+Brain-Tumor-Detection/.ipynb_checkpoints/
+
+# ============================================
+# PYTHON VIRTUAL ENVIRONMENTS
+# ============================================
+.venv/
+venv/
+env/
+ENV/
+.virtualenv/
+*.virtualenv
 
 # Deployment
 .vercel
@@ -133,3 +174,55 @@ next-env.d.ts
 
 # Local development
 .env.local
+
+# ============================================
+# JUPYTER NOTEBOOKS
+# ============================================
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ============================================
+# IMAGE FILES (Keep only essential ones)
+# ============================================
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+# Allow frontend public assets
+!frontend/public/**/*.png
+!frontend/public/**/*.jpg
+!frontend/public/**/*.jpeg
+!frontend/public/**/*.svg
+# Allow Brain-Tumor-Detection documentation images
+!Brain-Tumor-Detection/*.PNG
+!Brain-Tumor-Detection/*.jpg
+
+# ============================================
+# SYSTEM FILES
+# ============================================
+# Windows
+desktop.ini
+Thumbs.db
+$RECYCLE.BIN/
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Linux
+*~
+
+# ============================================
+# DATABASE FILES
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+curagenie.db
+curagenie_real.db
+
+# ============================================
+# BATCH & SHELL SCRIPTS (Optional - keeping for now)
+# ============================================
+# start-*.bat

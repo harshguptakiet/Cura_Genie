@@ -207,7 +207,7 @@ export function Chatbot({ userId }: ChatbotProps) {
         </Alert>
       )}
 
-    <Card className="h-[600px] flex flex-col shadow-2xl border border-gray-200 bg-white/90 backdrop-blur-sm animate-slide-up">
+    <Card className="h-[600px] min-h-0 flex flex-col overflow-hidden shadow-2xl border border-gray-200 bg-white/90 backdrop-blur-sm animate-slide-up">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -224,8 +224,8 @@ export function Chatbot({ userId }: ChatbotProps) {
         </CardDescription>
       </CardHeader>
       
-      <CardContent className="flex-1 flex flex-col p-0">
-        <ScrollArea className="flex-1 p-4 custom-scrollbar">
+      <CardContent className="flex-1 min-h-0 flex flex-col p-0">
+        <ScrollArea className="flex-1 min-h-0 p-4 custom-scrollbar">
           <div className="space-y-4">
             {messages.map((message) => (
               <div
@@ -245,13 +245,13 @@ export function Chatbot({ userId }: ChatbotProps) {
                 </Avatar>
                 
                 <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-3 shadow-lg transition-all duration-200 hover:shadow-xl ${
+                  className={`max-w-[calc(100%-3rem)] sm:max-w-[80%] min-w-0 overflow-hidden rounded-2xl px-4 py-3 shadow-lg transition-all duration-200 hover:shadow-xl ${
                     message.isUser
-                      ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white ml-auto transform hover:scale-105'
+                      ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white ml-auto'
                       : 'bg-gradient-to-r from-white to-gray-50 text-gray-900 border border-gray-200/50'
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  <p className="text-sm whitespace-pre-wrap break-words [overflow-wrap:anywhere]">{message.content}</p>
                   <p
                     className={`text-xs mt-1 ${
                       message.isUser ? 'text-blue-100' : 'text-gray-500'
