@@ -55,3 +55,33 @@ class MRIAnalysis(Base):
     uploaded_at = Column(DateTime(timezone=True), server_default=func.now())
     analysis_started_at = Column(DateTime(timezone=True), default=None)
     analysis_completed_at = Column(DateTime(timezone=True), default=None)
+
+
+class FlaggedMRIReport(Base):
+    __tablename__ = 'flagged_mri_reports'
+
+    id = Column(Integer, primary_key=True, index=True)
+    mri_analysis_id = Column(Integer, ForeignKey('mri_analyses.id'), nullable=False, index=True)
+    user_id = Column(String, index=True)
+
+    flag_reason = Column(String, nullable=False)
+    flag_status = Column(String, default='pending')  # pending, reviewed
+    model_name = Column(String, default='brain_tumor_detection_pipeline')
+
+    mc_mean_probability = Column(Float, default=None)
+    mc_uncertainty = Column(Float, default=None)
+    mc_entropy = Column(Float, default=None)
+
+    suggested_risk_level = Column(String, default='review_required')
+    auto_summary = Column(Text, default='')
+    analysis_snapshot_json = Column(Text, default='{}')
+
+    reviewed_by_user_id = Column(Integer, ForeignKey('users.id'), nullable=True)
+    reviewed_at = Column(DateTime(timezone=True), default=None)
+    expert_guess = Column(String, default=None)
+    expert_risk_level = Column(String, default=None)
+    expert_notes = Column(Text, default=None)
+    expert_regions_json = Column(Text, default='[]')
+
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())

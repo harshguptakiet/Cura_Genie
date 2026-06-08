@@ -100,14 +100,14 @@ export default function ReportsPage() {
   return (
     <div className="space-y-8">
       {/* Header Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl p-8">
+      <div className="bg-gradient-to-r from-slate-200 via-slate-100 to-slate-50 text-slate-900 rounded-2xl p-8 shadow-[0_14px_34px_rgba(15,23,42,0.08)] ring-1 ring-slate-200/90">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">
+            <h1 className="text-3xl font-semibold tracking-tight mb-2 flex items-center gap-3">
               <FileText className="h-8 w-8" />
               Health Reports
             </h1>
-            <p className="text-blue-100 text-lg">
+            <p className="text-slate-700 text-lg">
               Download and manage your personalized health analysis reports
             </p>
           </div>
@@ -119,7 +119,7 @@ export default function ReportsPage() {
         {reports.map((report) => {
           const IconComponent = report.icon;
           return (
-            <Card key={report.id} className="hover:shadow-lg transition-all hover:scale-105">
+            <Card key={report.id} className="transition-all duration-200 hover:shadow-[0_14px_32px_rgba(15,23,42,0.12)] hover:-translate-y-0.5">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
@@ -127,8 +127,8 @@ export default function ReportsPage() {
                       <IconComponent className={`h-6 w-6 ${report.color}`} />
                     </div>
                     <div>
-                      <CardTitle className="text-lg">{report.title}</CardTitle>
-                      <CardDescription className="mt-1">
+                      <CardTitle className="text-lg tracking-tight">{report.title}</CardTitle>
+                      <CardDescription className="mt-1 text-slate-600">
                         {report.description}
                       </CardDescription>
                     </div>
@@ -143,7 +143,7 @@ export default function ReportsPage() {
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4 text-sm text-gray-600">
+                  <div className="flex items-center gap-4 text-sm text-slate-600">
                     <div className="flex items-center gap-1">
                       <Calendar className="h-4 w-4" />
                       {new Date(report.date).toLocaleDateString()}
@@ -182,14 +182,14 @@ export default function ReportsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h4 className="font-semibold mb-2">Report Generation</h4>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-slate-600 leading-relaxed">
                 Reports are automatically generated after your genomic data is processed. 
                 They include comprehensive analysis, risk assessments, and personalized recommendations.
               </p>
             </div>
             <div>
               <h4 className="font-semibold mb-2">Data Privacy</h4>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-slate-600 leading-relaxed">
                 All reports are encrypted and stored securely. You have full control over 
                 your data and can delete reports at any time.
               </p>

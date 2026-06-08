@@ -35,7 +35,7 @@ def get_db() -> Session:
 def create_tables():
     """Create all database tables"""
     # Import all models to ensure they're registered with Base
-    from db.models import GenomicData, PrsScore, MlPrediction
+    from db.models import GenomicData, PrsScore, MlPrediction, MRIAnalysis, FlaggedMRIReport
     from db.auth_models import User, PatientProfile, MedicalReport
     
     Base.metadata.create_all(bind=engine)

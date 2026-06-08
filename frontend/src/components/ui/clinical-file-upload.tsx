@@ -85,7 +85,8 @@ const uploadClinicalFile = async (
     
     xhr.addEventListener('error', () => {
       console.error('Clinical file upload network error');
-      reject(new Error('Upload failed due to network error'));
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      reject(new Error(`Upload failed due to network error. Backend may be unreachable at ${API_BASE_URL}`));
     });
     
     // Use backend base URL from environment to avoid localhost/mixed-content/CORS issues
