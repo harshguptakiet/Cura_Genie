@@ -45,6 +45,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from api.chatbot import router as chatbot_router
+app.include_router(chatbot_router)
+
 # Database setup (configurable via environment variables)
 DATABASE_PATH = os.getenv("DATABASE_PATH", "/app/data/curagenie_real.db")
 UPLOADS_DIR = Path(os.getenv("UPLOADS_DIR", "uploads"))
@@ -809,72 +812,6 @@ async def get_genome_browser_data(user_id: str):
             },
             "chart_data": [],
             "error": str(e)
-        }
-
-# REAL chatbot with genomic knowledge
-@app.post("/api/chatbot/chat")
-async def real_chatbot(message: dict):
-    """REAL chatbot with actual medical and genomic knowledge"""
-    try:
-        user_message = message.get("message", "").lower()
-        
-        # Real medical knowledge responses
-        if any(word in user_message for word in ['prs', 'polygenic', 'risk', 'score']):
-            response = ("Polygenic Risk Scores (PRS) are calculated from multiple genetic variants across your genome. "
-                       "They represent your genetic predisposition to diseases compared to the general population. "
-                       "A higher PRS doesn't mean you will develop the disease - it indicates increased genetic risk that "
-                       "interacts with lifestyle, environment, and other factors. Your PRS is calculated using real "
-                       "algorithms from published genomic studies.")
-                       
-        elif any(word in user_message for word in ['vcf', 'variant', 'mutation', 'snp']):
-            response = ("VCF (Variant Call Format) files contain your genetic variants - differences between your DNA and "
-                       "the reference genome. SNPs (Single Nucleotide Polymorphisms) are the most common type. Each variant "
-                       "has a position, reference allele, and your alternative allele. Our system analyzes these variants "
-                       "to calculate disease risk scores using established genomic research.")
-                       
-        elif any(word in user_message for word in ['mri', 'brain', 'tumor', 'scan']):
-            response = ("MRI analysis uses computer vision and machine learning to detect abnormalities in brain scans. "
-                       "Our AI models are trained on medical imaging data to identify potential tumors, lesions, or "
-                       "structural changes. However, AI analysis should never replace professional medical diagnosis - "
-                       "always consult with healthcare providers for proper interpretation.")
-                       
-        elif any(word in user_message for word in ['diabetes', 'heart', 'alzheimer', 'disease']):
-            response = ("Disease risk prediction combines genetic, lifestyle, and demographic factors. Genetic predisposition "
-                       "is just one component - lifestyle choices like diet, exercise, and environment significantly impact "
-                       "your actual risk. High genetic risk can often be mitigated through preventive measures and "
-                       "regular monitoring with healthcare professionals.")
-                       
-        elif 'upload' in user_message or 'file' in user_message:
-            response = ("You can upload VCF files (from genetic testing) or FASTQ files (raw sequencing data). "
-                       "VCF files should contain your genetic variants, typically from companies like 23andMe, AncestryDNA, "
-                       "or clinical genetic testing. The system will automatically process your file and calculate "
-                       "personalized risk scores within a few minutes.")
-                       
-        elif any(word in user_message for word in ['hello', 'hi', 'help']):
-            response = ("Hello! I'm your CuraGenie AI assistant. I can help explain genetic concepts, disease risk scores, "
-                       "genomic analysis results, and guide you through using the platform. I provide educational information "
-                       "based on established medical and genomic research, but I'm not a substitute for professional medical advice.")
-                       
-        else:
-            response = ("I can help explain genetic analysis, PRS scores, disease risk factors, file uploads, and genomic concepts. "
-                       "What specific aspect of your genetic analysis would you like to understand better? Remember, "
-                       "I provide educational information - always consult healthcare professionals for medical decisions.")
-        
-        # Check if user has real data to provide personalized responses
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT COUNT(*) FROM prs_scores WHERE user_id = ?", (1,))  # Use actual user_id
-        has_scores = cursor.fetchone()[0] > 0
-        conn.close()
-        
-        if has_scores and ('my' in user_message or 'personal' in user_message):
-            response += "\n\nI can see you have genetic analysis results. Would you like me to explain what your specific scores mean?"
-        
-        return {
-            "response": response,
-            "timestamp": datetime.now().isoformat(),
-            "is_real_response": True,
-            "has_user_data": has_scores
         }
         
     except Exception as e:
