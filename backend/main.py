@@ -51,6 +51,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from api.chatbot import router as chatbot_router
+app.include_router(chatbot_router)
+
 # Database setup (configurable via environment variables)
 DATABASE_PATH = os.getenv("DATABASE_PATH", "/app/data/curagenie_real.db")
 UPLOADS_DIR = Path(os.getenv("UPLOADS_DIR", "uploads"))
