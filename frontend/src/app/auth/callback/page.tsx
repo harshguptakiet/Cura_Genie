@@ -59,7 +59,7 @@ export default function AuthCallbackPage() {
     }
 
     handleCallback()
-  }, [])
+  }, [router, setUser, setToken])
 
   return (
     <div className="min-h-screen flex items-center justify-center">

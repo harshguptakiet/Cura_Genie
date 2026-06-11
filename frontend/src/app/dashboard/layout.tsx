@@ -4,8 +4,7 @@ import React from 'react';
 import { ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, BarChart3, FileText, Stethoscope, Settings, Users, Timeline, Bot, Shield, HelpCircle, UserCircle } from 'lucide-react';
-import { Home, BarChart3, FileText, Stethoscope, Settings, Users, Timeline, Bot, Shield, HelpCircle, BrainCircuit } from 'lucide-react';
+import { Home, BarChart3, FileText, Stethoscope, Settings, Users, Timeline, Bot, Shield, HelpCircle, UserCircle, BrainCircuit } from 'lucide-react';
 import { ProtectedRoute } from '@/components/auth/protected-route';
 import { UserMenu } from '@/components/auth/user-menu';
 

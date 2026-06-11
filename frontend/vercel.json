@@ -3,7 +3,6 @@
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "outputDirectory": ".next",
   "functions": {
     "app/**/*.tsx": {
       "maxDuration": 30
@@ -26,12 +25,6 @@
           "value": "1; mode=block"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "$NEXT_PUBLIC_API_URL/api/:path*"
     }
   ]
 }
