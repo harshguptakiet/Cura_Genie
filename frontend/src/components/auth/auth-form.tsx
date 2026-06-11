@@ -157,7 +157,7 @@ export function AuthForm({ initialMode = 'login', resetToken }: AuthFormProps) {
 
   const getTitle = () => {
     switch (mode) {
-      case 'login': return 'Welcome Back'
+      case 'login': return 'Sign In'
       case 'register': return 'Create Account'
       case 'forgot-password': return 'Forgot Password'
       case 'reset-password': return 'Reset Password'
@@ -166,7 +166,7 @@ export function AuthForm({ initialMode = 'login', resetToken }: AuthFormProps) {
 
   const getDescription = () => {
     switch (mode) {
-      case 'login': return 'Sign in to your CuraGenie account'
+      case 'login': return 'Sign in or create a new CuraGenie account'
       case 'register': return 'Join CuraGenie for personalized healthcare insights'
       case 'forgot-password': return 'Enter your email to receive reset instructions'
       case 'reset-password': return 'Enter your new password'
