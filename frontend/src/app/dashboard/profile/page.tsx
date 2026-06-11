@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
-import { User, Mail, Phone, Shield, Loader2 } from 'lucide-react'
+import { User, Mail, Shield, Loader2 } from 'lucide-react'
 
 export default function ProfilePage() {
   const { user, token } = useAuthStore()
