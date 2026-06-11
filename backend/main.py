@@ -53,6 +53,8 @@ app.add_middleware(
 
 from api.chatbot import router as chatbot_router
 app.include_router(chatbot_router)
+from api.auth import router as auth_router
+app.include_router(auth_router)
 
 # Database setup (configurable via environment variables)
 DATABASE_PATH = os.getenv("DATABASE_PATH", "/app/data/curagenie_real.db")

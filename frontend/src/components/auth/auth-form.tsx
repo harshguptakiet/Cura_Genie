@@ -10,6 +10,7 @@ import { Switch } from '@/components/ui/switch'
 import { Alert } from '@/components/ui/alert'
 import { Loader2, Eye, EyeOff, Mail, Lock, User, Phone, Github, Chrome } from 'lucide-react'
 import { toast } from 'sonner'
+import { supabase } from '@/lib/supabaseClient'
 
 type AuthMode = 'login' | 'register' | 'forgot-password' | 'reset-password'
 
@@ -133,9 +134,18 @@ export function AuthForm({ initialMode = 'login', resetToken }: AuthFormProps) {
   }
 
   const handleSocialLogin = async (provider: 'google' | 'github') => {
-    toast.info(`${provider} login coming soon!`)
-    // In a real implementation, this would trigger OAuth flow
+  try {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
+    if (error) throw error
+  } catch (error) {
+    toast.error(error instanceof Error ? error.message : `${provider} login failed`)
   }
+}
 
   const updateFormData = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }))
