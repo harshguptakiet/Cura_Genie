@@ -345,6 +345,4 @@ export {
   getUserMRIImages as getUserImages,
   getMRIAnalysis as getAnalysis,
   deleteMRIImage as deleteImage,
-  getFlaggedReports,
-  submitFlaggedReportReview,
 };
