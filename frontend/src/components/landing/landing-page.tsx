@@ -19,18 +19,16 @@ import {
   Menu,
   X,
   ChevronDown,
-  Star,
   Heart,
   Zap,
   ArrowRight,
   Play,
-  Pause,
-  SkipForward,
-  Volume2,
   Wifi,
   Battery,
   Signal,
-  Linkedin
+  Linkedin,
+  Github,
+  Twitter
 } from 'lucide-react'
 import Image from 'next/image'
 
@@ -41,13 +39,13 @@ export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isVisible, setIsVisible] = useState({})
+  const [isVisible, setIsVisible] = useState<Record<string, boolean>>({})
 
   // Handle scroll effects
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY)
-      
+
       // Update active section based on scroll position
       const sections = ['home', 'features', 'services', 'stats', 'contact']
       const current = sections.find(section => {
@@ -70,7 +68,7 @@ export default function LandingPage() {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
-    
+
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
@@ -117,7 +115,7 @@ export default function LandingPage() {
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Gradient Orbs */}
-        <div 
+        <div
           className="absolute w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse"
           style={{
             left: mousePosition.x - 192 + 'px',
@@ -127,7 +125,7 @@ export default function LandingPage() {
         />
         <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-2xl animate-bounce" />
         <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 rounded-full blur-2xl animate-pulse" />
-        
+
         {/* Floating Particles */}
         {Array.from({ length: 50 }).map((_, i) => {
           // Use seed-based random values to ensure consistency between server and client
@@ -135,12 +133,12 @@ export default function LandingPage() {
           const seed2 = (i * 9301 + 49297 + 12345) % 233280;
           const seed3 = (i * 9301 + 49297 + 23456) % 233280;
           const seed4 = (i * 9301 + 49297 + 34567) % 233280;
-          
+
           const left = (seed1 / 233280) * 100;
           const top = (seed2 / 233280) * 100;
           const delay = (seed3 / 233280) * 3;
           const duration = 2 + (seed4 / 233280) * 3;
-          
+
           return (
             <div
               key={i}
@@ -165,8 +163,8 @@ export default function LandingPage() {
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-ping" />
             </div>
             <span className="font-medium">Welcome back!</span>
-            <Button 
-              size="sm" 
+            <Button
+              size="sm"
               variant="ghost"
               className="text-white hover:bg-white/20 px-3 py-1 rounded-lg transition-all duration-300 hover:scale-105"
               onClick={() => router.push('/dashboard')}
@@ -178,11 +176,20 @@ export default function LandingPage() {
       )}
 
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-        scrollY > 50 
-          ? 'bg-slate-900/95 backdrop-blur-xl shadow-2xl border-b border-white/10' 
+      <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${scrollY > 50
+<<<<<<< HEAD
+<<<<<<< HEAD
+        ? 'bg-slate-900/95 backdrop-blur-xl shadow-2xl border-b border-white/10'
+        : 'bg-transparent'
+=======
+          ? 'bg-slate-900/95 backdrop-blur-xl shadow-2xl border-b border-white/10'
           : 'bg-transparent'
-      }`}>
+>>>>>>> 78b6fb3 (updated the footer section)
+=======
+        ? 'bg-slate-900/95 backdrop-blur-xl shadow-2xl border-b border-white/10'
+        : 'bg-transparent'
+>>>>>>> caa32a5 (updated the footer section)
+        }`}>
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
@@ -208,11 +215,20 @@ export default function LandingPage() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                    activeSection === item.id 
-                      ? 'text-cyan-400' 
+                  className={`relative text-sm font-medium transition-all duration-300 hover:scale-105 ${activeSection === item.id
+<<<<<<< HEAD
+<<<<<<< HEAD
+                    ? 'text-cyan-400'
+                    : 'text-gray-300 hover:text-white'
+=======
+                      ? 'text-cyan-400'
                       : 'text-gray-300 hover:text-white'
-                  }`}
+>>>>>>> 78b6fb3 (updated the footer section)
+=======
+                    ? 'text-cyan-400'
+                    : 'text-gray-300 hover:text-white'
+>>>>>>> caa32a5 (updated the footer section)
+                    }`}
                 >
                   {item.label}
                   {activeSection === item.id && (
@@ -220,7 +236,7 @@ export default function LandingPage() {
                   )}
                 </button>
               ))}
-              <Button 
+              <Button
                 onClick={handleLaunchPlatform}
                 className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white px-6 py-2 rounded-xl shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-105 glow-cyan"
               >
@@ -257,7 +273,7 @@ export default function LandingPage() {
                     {item.label}
                   </button>
                 ))}
-                <Button 
+                <Button
                   onClick={handleLaunchPlatform}
                   className="w-full mt-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 rounded-xl"
                 >
@@ -280,18 +296,18 @@ export default function LandingPage() {
                   CuraGenie
                 </span>
               </h1>
-              
+
               <h2 className="text-3xl lg:text-4xl font-semibold text-white/90">
                 AI-Powered Healthcare Platform
               </h2>
-              
+
               <p className="text-xl text-gray-300 leading-relaxed max-w-2xl">
-                Transform your healthcare experience with our intelligent medical platform 
+                Transform your healthcare experience with our intelligent medical platform
                 featuring AI diagnostics, virtual consultations, and personalized health insights.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start pt-4">
-                <Button 
+                <Button
                   onClick={handleLaunchPlatform}
                   size="lg"
                   className="group bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white px-8 py-4 text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-500 hover:scale-110 glow-cyan"
@@ -300,8 +316,8 @@ export default function LandingPage() {
                   Launch Platform
                   <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
-                
-                <Button 
+
+                <Button
                   variant="outline"
                   size="lg"
                   onClick={() => scrollToSection('features')}
@@ -328,14 +344,14 @@ export default function LandingPage() {
                     <Battery className="h-4 w-4" />
                   </div>
                 </div>
-                
+
                 {/* Progress Bar */}
                 <div className="mb-8">
                   <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full animate-loading-bar" />
                   </div>
                 </div>
-                
+
                 {/* Health Metrics */}
                 <div className="grid grid-cols-3 gap-6 mb-8">
                   <div className="bg-gradient-to-br from-slate-700/50 to-slate-800/50 rounded-2xl p-4 text-center border border-white/5 hover:border-cyan-400/30 transition-all duration-300 hover:scale-105 glow-subtle">
@@ -343,20 +359,20 @@ export default function LandingPage() {
                     <div className="text-2xl font-bold text-white mb-1 animate-counter" data-target="72">72</div>
                     <div className="text-sm text-gray-400">BPM</div>
                   </div>
-                  
+
                   <div className="bg-gradient-to-br from-slate-700/50 to-slate-800/50 rounded-2xl p-4 text-center border border-white/5 hover:border-emerald-400/30 transition-all duration-300 hover:scale-105 glow-subtle">
                     <div className="text-3xl mb-2 animate-pulse">🌡️</div>
                     <div className="text-2xl font-bold text-white mb-1 animate-counter" data-target="98.6">98.6</div>
                     <div className="text-sm text-gray-400">°F</div>
                   </div>
-                  
+
                   <div className="bg-gradient-to-br from-slate-700/50 to-slate-800/50 rounded-2xl p-4 text-center border border-white/5 hover:border-purple-400/30 transition-all duration-300 hover:scale-105 glow-subtle">
                     <div className="text-3xl mb-2 animate-pulse">🫁</div>
                     <div className="text-2xl font-bold text-white mb-1 animate-counter" data-target="16">16</div>
                     <div className="text-sm text-gray-400">RPM</div>
                   </div>
                 </div>
-                
+
                 {/* Status Indicators */}
                 <div className="flex justify-between items-center text-sm">
                   <div className="flex items-center gap-2 text-green-400">
@@ -366,14 +382,14 @@ export default function LandingPage() {
                   <div className="text-gray-400">Last Updated: Now</div>
                 </div>
               </div>
-              
+
               {/* Floating Elements */}
               <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full animate-bounce" />
               <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse" />
             </div>
           </div>
         </div>
-        
+
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <div className="flex flex-col items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300 cursor-pointer" onClick={() => scrollToSection('features')}>
@@ -388,7 +404,7 @@ export default function LandingPage() {
         <div className="container mx-auto">
           <div className={`text-center mb-20 ${isVisible.features ? 'animate-fade-in-up' : 'opacity-0'}`} data-animate id="features">
             <h2 className="text-5xl font-bold text-white mb-6">
-              Revolutionary 
+              Revolutionary
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Features</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -407,7 +423,7 @@ export default function LandingPage() {
               },
               {
                 icon: Activity,
-                title: "Real-time Monitoring", 
+                title: "Real-time Monitoring",
                 description: "Continuous health tracking with real-time alerts and comprehensive dashboard visualization for all your vital signs.",
                 color: "from-cyan-500 to-blue-500",
                 glowColor: "cyan"
@@ -441,26 +457,25 @@ export default function LandingPage() {
                 glowColor: "purple"
               }
             ].map((feature, index) => (
-              <div 
-                key={index} 
-                className={`group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
-                  isVisible.features ? `animate-fade-in-up` : 'opacity-0'
-                }`}
+              <div
+                key={index}
+                className={`group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:shadow-2xl ${isVisible.features ? `animate-fade-in-up` : 'opacity-0'
+                  }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
                 data-animate
               >
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 glow-${feature.glowColor}`}>
                   <feature.icon className="h-8 w-8 text-white" />
                 </div>
-                
+
                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors duration-300">
                   {feature.title}
                 </h3>
-                
+
                 <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
                   {feature.description}
                 </p>
-                
+
                 {/* Hover Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
@@ -474,7 +489,7 @@ export default function LandingPage() {
         <div className="container mx-auto">
           <div className={`text-center mb-20 ${isVisible.services ? 'animate-fade-in-up' : 'opacity-0'}`} data-animate id="services">
             <h2 className="text-5xl font-bold text-white mb-6">
-              Platform 
+              Platform
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Services</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -492,7 +507,7 @@ export default function LandingPage() {
               },
               {
                 icon: Brain,
-                title: "AI Health Analytics", 
+                title: "AI Health Analytics",
                 description: "Advanced artificial intelligence for health data analysis and predictive healthcare insights.",
                 features: ["Intelligent data processing", "Pattern recognition", "Predictive health analysis", "Personalized recommendations", "Risk assessment"]
               },
@@ -503,26 +518,25 @@ export default function LandingPage() {
                 features: ["Cross-platform compatibility", "Responsive design", "Offline capabilities", "Push notifications", "Secure data sync"]
               }
             ].map((service, index) => (
-              <div 
-                key={index} 
-                className={`group bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-xl rounded-3xl p-10 border border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl glow-subtle ${
-                  isVisible.services ? `animate-fade-in-up` : 'opacity-0'
-                }`}
+              <div
+                key={index}
+                className={`group bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-xl rounded-3xl p-10 border border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:scale-105 hover:shadow-2xl glow-subtle ${isVisible.services ? `animate-fade-in-up` : 'opacity-0'
+                  }`}
                 style={{ animationDelay: `${index * 0.2}s` }}
                 data-animate
               >
                 <div className="w-20 h-20 rounded-3xl bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 glow-cyan">
                   <service.icon className="h-10 w-10 text-white" />
                 </div>
-                
+
                 <h3 className="text-3xl font-bold text-white mb-6 group-hover:text-cyan-400 transition-colors duration-300">
                   {service.title}
                 </h3>
-                
+
                 <p className="text-gray-300 text-lg mb-8 leading-relaxed">
                   {service.description}
                 </p>
-                
+
                 <ul className="space-y-4 mb-8">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
@@ -531,9 +545,9 @@ export default function LandingPage() {
                     </li>
                   ))}
                 </ul>
-                
-                <Button 
-                  variant="outline" 
+
+                <Button
+                  variant="outline"
                   onClick={handleLaunchPlatform}
                   className="w-full border-2 border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 py-3 rounded-2xl font-semibold transition-all duration-300 hover:scale-105"
                 >
@@ -551,14 +565,14 @@ export default function LandingPage() {
         <div className="container mx-auto">
           <div className={`text-center mb-20 ${isVisible.stats ? 'animate-fade-in-up' : 'opacity-0'}`} data-animate id="stats">
             <h2 className="text-5xl font-bold text-white mb-6">
-              Platform 
+              Platform
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Statistics</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Trusted by healthcare providers and patients worldwide for delivering exceptional medical care
             </p>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
             {[
               { number: "10K+", label: "Active Users", icon: Users },
@@ -566,11 +580,10 @@ export default function LandingPage() {
               { number: "99.9%", label: "Uptime", icon: Shield },
               { number: "24/7", label: "Support", icon: Heart }
             ].map((stat, index) => (
-              <div 
-                key={index} 
-                className={`group text-center bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:scale-110 glow-subtle ${
-                  isVisible.stats ? `animate-fade-in-up` : 'opacity-0'
-                }`}
+              <div
+                key={index}
+                className={`group text-center bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:scale-110 glow-subtle ${isVisible.stats ? `animate-fade-in-up` : 'opacity-0'
+                  }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
                 data-animate
               >
@@ -582,11 +595,10 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
-          
+
           {/* Developer Section */}
-          <div className={`bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-xl rounded-3xl p-12 border border-white/10 max-w-4xl mx-auto text-center glow-subtle ${
-            isVisible.stats ? 'animate-fade-in-up' : 'opacity-0'
-          }`} data-animate style={{ animationDelay: '0.5s' }}>
+          <div className={`bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-xl rounded-3xl p-12 border border-white/10 max-w-4xl mx-auto text-center glow-subtle ${isVisible.stats ? 'animate-fade-in-up' : 'opacity-0'
+            }`} data-animate style={{ animationDelay: '0.5s' }}>
             <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-8 shadow-2xl hover:scale-110 transition-transform duration-300 glow-cyan cursor-pointer border-4 border-cyan-400/50">
               <Image
                 src="/curagenie-hero.png"
@@ -597,16 +609,16 @@ export default function LandingPage() {
                 quality={95}
               />
             </div>
-            
+
             <h3 className="text-4xl font-bold text-white mb-4">Harsh Gupta</h3>
             <p className="text-xl text-cyan-400 mb-6 font-semibold">Full Stack Developer & Healthcare Tech Innovator</p>
-            
+
             <p className="text-lg text-gray-300 leading-relaxed mb-8 max-w-2xl mx-auto">
-              Passionate about revolutionizing healthcare through cutting-edge technology. 
-              CuraGenie represents the perfect fusion of AI innovation and healthcare accessibility, 
+              Passionate about revolutionizing healthcare through cutting-edge technology.
+              CuraGenie represents the perfect fusion of AI innovation and healthcare accessibility,
               designed to transform how we approach medical care in the digital age.
             </p>
-            
+
             <div className="flex flex-wrap justify-center gap-3 mb-8">
               {["React", "Next.js", "Node.js", "AI/ML", "Healthcare Tech", "TypeScript"].map((skill) => (
                 <span key={skill} className="px-4 py-2 bg-gradient-to-r from-slate-700 to-slate-800 text-cyan-400 rounded-full text-sm font-semibold border border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105">
@@ -614,17 +626,17 @@ export default function LandingPage() {
                 </span>
               ))}
             </div>
-            
+
             <div className="flex justify-center space-x-4">
               {[
                 { icon: Mail, label: "Email", href: "mailto:guptasecularharsh@gmail.com" },
                 { icon: Phone, label: "Phone", href: "tel:+918081434149" },
                 { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/harsh-gupta-kiet/" }
               ].map((contact, idx) => (
-                <Button 
-                  key={idx} 
-                  variant="outline" 
-                  size="lg" 
+                <Button
+                  key={idx}
+                  variant="outline"
+                  size="lg"
                   className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 rounded-2xl px-6 py-3 transition-all duration-300 hover:scale-105"
                   onClick={() => window.open(contact.href, '_blank', 'noopener,noreferrer')}
                 >
@@ -642,7 +654,7 @@ export default function LandingPage() {
         <div className="container mx-auto">
           <div className={`text-center mb-20 ${isVisible.contact ? 'animate-fade-in-up' : 'opacity-0'}`} data-animate id="contact">
             <h2 className="text-5xl font-bold text-white mb-6">
-              Get In 
+              Get In
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Touch</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -713,7 +725,7 @@ export default function LandingPage() {
                     placeholder="Enter your full name"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-lg font-semibold text-white mb-3">
                     Email Address
@@ -727,7 +739,7 @@ export default function LandingPage() {
                     placeholder="Enter your email address"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-lg font-semibold text-white mb-3">
                     Message
@@ -741,8 +753,8 @@ export default function LandingPage() {
                     placeholder="Tell us about your healthcare needs or questions..."
                   />
                 </div>
-                
-                <Button 
+
+                <Button
                   type="submit"
                   className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white text-lg font-semibold py-4 rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-500 hover:scale-105 glow-cyan"
                 >
@@ -756,50 +768,87 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-16 px-6 bg-slate-900/80 backdrop-blur-xl border-t border-white/10 relative">
+      {/* Redesigned Footer */}
+      <footer className="bg-[#0a0f1e] pt-16 pb-8 px-6 border-t border-white/10">
         <div className="container mx-auto">
-          <div className="text-center space-y-6">
-            {/* Logo */}
-            <div className="flex items-center justify-center space-x-3 group">
-              <Brain className="h-12 w-12 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300" />
-              <span className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                CuraGenie
-              </span>
-            </div>
-            
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              Revolutionizing healthcare through advanced AI technology and personalized medicine. 
-              Built with ❤️ for a healthier tomorrow.
-            </p>
-            
-            {/* Social Links */}
-            <div className="flex justify-center space-x-6">
-              {[
-                { icon: Mail, label: "Email", href: "mailto:guptasecularharsh@gmail.com" },
-                { icon: Phone, label: "Phone", href: "tel:+918081434149" },
-                { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/harsh-gupta-kiet/" }
-              ].map((social, index) => (
-                <div 
-                  key={index} 
-                  className="w-12 h-12 rounded-full bg-slate-700/50 flex items-center justify-center cursor-pointer hover:bg-cyan-500/20 hover:text-cyan-400 transition-all duration-300 hover:scale-110 glow-subtle"
-                  onClick={() => window.open(social.href, '_blank', 'noopener,noreferrer')}
-                >
-                  <social.icon className="h-6 w-6 text-gray-400 hover:text-cyan-400" />
+          {/* Top Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-8 pb-8 border-b-[0.5px] border-white/10">
+            {/* Column 1: Brand */}
+            <div className="space-y-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#4f9cf9] to-[#a78bfa] flex items-center justify-center">
+                  <Activity className="h-5 w-5 text-white" />
                 </div>
-              ))}
+                <span className="text-[17px] font-bold text-white">CuraGenie</span>
+              </div>
+              <p className="text-[13px] leading-relaxed text-white/50 max-w-[240px]">
+                Revolutionizing healthcare through advanced AI technology and personalized medicine. Built with ❤️ for a healthier tomorrow.
+              </p>
+              <div className="flex space-x-3">
+                {[
+                  { icon: Linkedin, href: "https://linkedin.com/in/harsh-gupta-kiet/" },
+                  { icon: Github, href: "https://github.com/harshguptakiet" },
+                  { icon: Twitter, href: "https://twitter.com" }
+                ].map((social, i) => (
+                  <a
+                    key={i}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/60 hover:text-white hover:border-white/30 transition-all"
+                  >
+                    <social.icon className="h-4 w-4" />
+                  </a>
+                ))}
+              </div>
             </div>
-            
-            {/* Copyright */}
-            <div className="border-t border-slate-700/50 pt-8 space-y-2">
-              <p className="text-gray-400 text-lg">
-                © 2025 CuraGenie - Developed by 
-                <span className="text-cyan-400 font-semibold"> Harsh Gupta</span>. 
-                All rights reserved.
-              </p>
-              <p className="text-gray-500 text-sm">
-                Built with cutting-edge technology: React, Next.js, TypeScript & AI/ML
-              </p>
+
+            {/* Column 2: Platform */}
+            <div className="space-y-6">
+              <h4 className="text-[13px] font-medium uppercase tracking-[0.05em] text-white/40">Platform</h4>
+              <ul className="space-y-3">
+                {['Health Dashboard', 'AI Analytics', 'Mobile App', 'API Access'].map((item) => (
+                  <li key={item}>
+                    <a href="#" className="text-[13px] text-white/60 hover:text-white transition-colors">{item}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 3: Resources */}
+            <div className="space-y-6">
+              <h4 className="text-[13px] font-medium uppercase tracking-[0.05em] text-white/40">Resources</h4>
+              <ul className="space-y-3">
+                {['Documentation', 'Blog', 'Case Studies', 'Support'].map((item) => (
+                  <li key={item}>
+                    <a href="#" className="text-[13px] text-white/60 hover:text-white transition-colors">{item}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 4: Contact */}
+            <div className="space-y-6">
+              <h4 className="text-[13px] font-medium uppercase tracking-[0.05em] text-white/40">Contact</h4>
+              <div className="space-y-3">
+                <p className="text-[13px] text-white/50">guptasecularharsh@gmail.com</p>
+                <p className="text-[13px] text-white/50">+91 8081434149</p>
+              </div>
+              <div className="mt-6 p-4 rounded-xl border border-[#4f9cf9]/25 bg-[#4f9cf9]/[0.08] space-y-1">
+                <span className="text-[10px] font-bold text-[#4f9cf9] uppercase tracking-wider">HIPAA COMPLIANT</span>
+                <p className="text-[11px] text-[#4f9cf9]/80 leading-tight">Enterprise-grade security for your health data</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="flex flex-col md:flex-row justify-between items-center pt-5 gap-4">
+            <div className="text-[12px] text-white/30">
+              © 2025 CuraGenie — Built by Harsh Gupta · React · Next.js · TypeScript
+            </div>
+            <div className="flex gap-4">
+              <a href="/privacy-policy" className="text-[12px] text-white/30 hover:text-white transition-colors">Privacy policy</a>
+              <a href="#" className="text-[12px] text-white/30 hover:text-white transition-colors">Terms of service</a>
             </div>
           </div>
         </div>
