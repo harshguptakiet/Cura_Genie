@@ -547,96 +547,257 @@ export default function LandingPage() {
       </section>
 
       {/* Statistics/About Section */}
-      <section id="stats" className="py-32 px-6 relative">
-        <div className="container mx-auto">
-          <div className={`text-center mb-20 ${isVisible.stats ? 'animate-fade-in-up' : 'opacity-0'}`} data-animate id="stats">
-            <h2 className="text-5xl font-bold text-white mb-6">
-              Platform 
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">Statistics</span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Trusted by healthcare providers and patients worldwide for delivering exceptional medical care
-            </p>
+      {/* Statistics/About Section */}
+<section id="stats" className="py-32 px-6 relative overflow-hidden">
+  {/* Background Glow */}
+  <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute top-20 left-20 w-72 h-72 bg-cyan-500/10 blur-3xl rounded-full animate-pulse" />
+    <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-500/10 blur-3xl rounded-full animate-pulse" />
+  </div>
+
+  <div className="container mx-auto relative z-10">
+
+    {/* Heading */}
+    <div
+      className={`text-center mb-24 ${
+        isVisible.stats ? 'animate-fade-in-up' : 'opacity-0'
+      }`}
+      data-animate
+      id="stats"
+    >
+      <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cyan-500/10 border border-cyan-400/20 text-cyan-400 text-sm font-semibold mb-6 backdrop-blur-md">
+        <Star className="h-4 w-4" />
+        Trusted Healthcare Innovation
+      </div>
+
+      <h2 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+        About
+        <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent ml-4">
+          CuraGenie
+        </span>
+      </h2>
+
+      <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+        CuraGenie is redefining digital healthcare using advanced artificial intelligence,
+        real-time analytics, and human-centered technology. Our platform bridges the gap
+        between patients and healthcare providers through intelligent automation,
+        predictive healthcare insights, and seamless medical accessibility.
+      </p>
+    </div>
+
+    {/* Stats Grid */}
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+      {[
+        {
+          number: '10K+',
+          label: 'Active Users',
+          icon: Users,
+          desc: 'Healthcare users actively connected',
+          color: 'from-cyan-500 to-blue-500'
+        },
+        {
+          number: '50+',
+          label: 'AI Features',
+          icon: Brain,
+          desc: 'Smart healthcare modules integrated',
+          color: 'from-purple-500 to-pink-500'
+        },
+        {
+          number: '99.9%',
+          label: 'Platform Uptime',
+          icon: Shield,
+          desc: 'Enterprise-grade reliability',
+          color: 'from-green-500 to-emerald-500'
+        },
+        {
+          number: '24/7',
+          label: 'Support Access',
+          icon: Heart,
+          desc: 'Continuous healthcare assistance',
+          color: 'from-orange-500 to-red-500'
+        }
+      ].map((stat, index) => (
+        <div
+          key={index}
+          className={`group relative overflow-hidden bg-gradient-to-br from-slate-800/60 to-slate-900/70 backdrop-blur-2xl rounded-3xl p-8 border border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:scale-105 hover:-translate-y-2 ${
+            isVisible.stats ? 'animate-fade-in-up' : 'opacity-0'
+          }`}
+          style={{ animationDelay: `${index * 0.1}s` }}
+          data-animate
+        >
+          {/* Glow */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-cyan-500/10 to-purple-500/10" />
+
+          <div
+            className={`relative w-16 h-16 rounded-2xl bg-gradient-to-r ${stat.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 glow-cyan`}
+          >
+            <stat.icon className="h-8 w-8 text-white" />
           </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+
+          <div className="relative text-5xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors duration-300">
+            {stat.number}
+          </div>
+
+          <h4 className="relative text-xl font-semibold text-white mb-2">
+            {stat.label}
+          </h4>
+
+          <p className="relative text-gray-400 text-sm leading-relaxed">
+            {stat.desc}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    {/* Main About Card */}
+    <div
+      className={`relative overflow-hidden bg-gradient-to-br from-slate-800/70 to-slate-900/80 backdrop-blur-2xl rounded-[40px] border border-white/10 shadow-2xl p-12 lg:p-16 ${
+        isVisible.stats ? 'animate-fade-in-up' : 'opacity-0'
+      }`}
+      data-animate
+      style={{ animationDelay: '0.3s' }}
+    >
+      {/* Glow */}
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5 pointer-events-none" />
+
+      <div className="grid lg:grid-cols-2 gap-14 items-center">
+
+        {/* Left Content */}
+        <div className="relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-cyan-400 text-sm font-medium mb-6">
+            <Zap className="h-4 w-4" />
+            AI-Powered Healthcare Ecosystem
+          </div>
+
+          <h3 className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-8">
+            Building the Future of
+            <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              {" "}Smart Healthcare
+            </span>
+          </h3>
+
+          <p className="text-lg text-gray-300 leading-relaxed mb-8">
+            Our mission is to empower healthcare systems with intelligent,
+            scalable, and secure digital solutions. CuraGenie combines AI,
+            cloud computing, predictive analytics, and real-time monitoring
+            to deliver seamless patient experiences and smarter medical decisions.
+          </p>
+
+          <div className="space-y-4">
             {[
-              { number: "10K+", label: "Active Users", icon: Users },
-              { number: "50+", label: "AI Features", icon: Brain },
-              { number: "99.9%", label: "Uptime", icon: Shield },
-              { number: "24/7", label: "Support", icon: Heart }
-            ].map((stat, index) => (
-              <div 
-                key={index} 
-                className={`group text-center bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-cyan-400/30 transition-all duration-500 hover:scale-110 glow-subtle ${
-                  isVisible.stats ? `animate-fade-in-up` : 'opacity-0'
-                }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-                data-animate
-              >
-                <stat.icon className="h-12 w-12 text-cyan-400 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <div className="text-4xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300 animate-counter" data-target={stat.number}>
-                  {stat.number}
+              "AI-assisted healthcare insights",
+              "Secure and scalable architecture",
+              "Cross-platform accessibility",
+              "Modern patient-centric experience"
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-4">
+                <div className="w-8 h-8 rounded-full bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center">
+                  <CheckCircle className="h-4 w-4 text-cyan-400" />
                 </div>
-                <div className="text-gray-300 font-medium group-hover:text-gray-200 transition-colors duration-300">{stat.label}</div>
+
+                <span className="text-gray-300 text-lg">
+                  {item}
+                </span>
               </div>
             ))}
           </div>
-          
-          {/* Developer Section */}
-          <div className={`bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-xl rounded-3xl p-12 border border-white/10 max-w-4xl mx-auto text-center glow-subtle ${
-            isVisible.stats ? 'animate-fade-in-up' : 'opacity-0'
-          }`} data-animate style={{ animationDelay: '0.5s' }}>
-            <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-8 shadow-2xl hover:scale-110 transition-transform duration-300 glow-cyan cursor-pointer border-4 border-cyan-400/50">
-              <Image
-                src="/curagenie-hero.png"
-                alt="Harsh Gupta - CuraGenie Developer"
-                width={128}
-                height={128}
-                className="w-full h-full object-cover"
-                quality={95}
-              />
-            </div>
-            
-            <h3 className="text-4xl font-bold text-white mb-4">Harsh Gupta</h3>
-            <p className="text-xl text-cyan-400 mb-6 font-semibold">Full Stack Developer & Healthcare Tech Innovator</p>
-            
-            <p className="text-lg text-gray-300 leading-relaxed mb-8 max-w-2xl mx-auto">
-              Passionate about revolutionizing healthcare through cutting-edge technology. 
-              CuraGenie represents the perfect fusion of AI innovation and healthcare accessibility, 
-              designed to transform how we approach medical care in the digital age.
-            </p>
-            
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              {["React", "Next.js", "Node.js", "AI/ML", "Healthcare Tech", "TypeScript"].map((skill) => (
-                <span key={skill} className="px-4 py-2 bg-gradient-to-r from-slate-700 to-slate-800 text-cyan-400 rounded-full text-sm font-semibold border border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105">
-                  {skill}
-                </span>
-              ))}
-            </div>
-            
-            <div className="flex justify-center space-x-4">
-              {[
-                { icon: Mail, label: "Email", href: "mailto:guptasecularharsh@gmail.com" },
-                { icon: Phone, label: "Phone", href: "tel:+918081434149" },
-                { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/harsh-gupta-kiet/" }
-              ].map((contact, idx) => (
-                <Button 
-                  key={idx} 
-                  variant="outline" 
-                  size="lg" 
-                  className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 rounded-2xl px-6 py-3 transition-all duration-300 hover:scale-105"
-                  onClick={() => window.open(contact.href, '_blank', 'noopener,noreferrer')}
-                >
-                  <contact.icon className="h-5 w-5" />
-                  <span className="sr-only">{contact.label}</span>
-                </Button>
-              ))}
+        </div>
+
+        {/* Right Developer Card */}
+        <div className="relative z-10">
+          <div className="relative bg-gradient-to-br from-slate-900/70 to-slate-800/70 rounded-3xl border border-white/10 p-10 backdrop-blur-xl hover:scale-[1.02] transition-all duration-500 glow-subtle">
+
+            {/* Floating Glow */}
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl" />
+
+            {/* Profile */}
+            <div className="flex flex-col items-center text-center">
+
+              <div className="relative mb-8">
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full blur-xl opacity-50 animate-pulse" />
+
+                <div className="relative w-36 h-36 rounded-full overflow-hidden border-4 border-cyan-400/40 shadow-2xl">
+                  <Image
+                    src="/curagenie-hero.png"
+                    alt="Harsh Gupta"
+                    width={144}
+                    height={144}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              <h3 className="text-3xl font-bold text-white mb-2">
+                Harsh Gupta
+              </h3>
+
+              <p className="text-cyan-400 font-semibold text-lg mb-6">
+                Full Stack Developer & AI Healthcare Innovator
+              </p>
+
+              <p className="text-gray-300 leading-relaxed mb-8">
+                Passionate about combining healthcare and cutting-edge technology
+                to create intelligent medical platforms that improve accessibility,
+                diagnosis, and patient experiences worldwide.
+              </p>
+
+              {/* Skills */}
+              <div className="flex flex-wrap justify-center gap-3 mb-8">
+                {[
+                  'Next.js',
+                  'React',
+                  'TypeScript',
+                  'Node.js',
+                  'AI/ML',
+                  'Healthcare Tech'
+                ].map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-4 py-2 rounded-full bg-slate-800 border border-cyan-400/20 text-cyan-400 text-sm font-medium hover:border-cyan-400/50 transition-all duration-300"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+
+              {/* Socials */}
+              <div className="flex gap-4">
+                {[
+                  {
+                    icon: Mail,
+                    href: 'mailto:guptasecularharsh@gmail.com'
+                  },
+                  {
+                    icon: Phone,
+                    href: 'tel:+918081434149'
+                  },
+                  {
+                    icon: Linkedin,
+                    href: 'https://linkedin.com/in/harsh-gupta-kiet/'
+                  }
+                ].map((item, i) => (
+                  <Button
+                    key={i}
+                    variant="outline"
+                    size="icon"
+                    onClick={() =>
+                      window.open(item.href, '_blank', 'noopener,noreferrer')
+                    }
+                    className="border-cyan-400/30 text-cyan-400 hover:bg-cyan-400/10 hover:border-cyan-400 rounded-2xl w-14 h-14 transition-all duration-300 hover:scale-110"
+                  >
+                    <item.icon className="h-5 w-5" />
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
+      </div>
+    </div>
+  </div>
+</section>
+            
       {/* Contact Section */}
       <section id="contact" className="py-32 px-6 bg-gradient-to-t from-slate-900/50 to-transparent relative">
         <div className="container mx-auto">
@@ -757,53 +918,138 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-6 bg-slate-900/80 backdrop-blur-xl border-t border-white/10 relative">
-        <div className="container mx-auto">
-          <div className="text-center space-y-6">
-            {/* Logo */}
-            <div className="flex items-center justify-center space-x-3 group">
-              <Brain className="h-12 w-12 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300" />
-              <span className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                CuraGenie
-              </span>
-            </div>
-            
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              Revolutionizing healthcare through advanced AI technology and personalized medicine. 
-              Built with ❤️ for a healthier tomorrow.
-            </p>
-            
-            {/* Social Links */}
-            <div className="flex justify-center space-x-6">
-              {[
-                { icon: Mail, label: "Email", href: "mailto:guptasecularharsh@gmail.com" },
-                { icon: Phone, label: "Phone", href: "tel:+918081434149" },
-                { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/harsh-gupta-kiet/" }
-              ].map((social, index) => (
-                <div 
-                  key={index} 
-                  className="w-12 h-12 rounded-full bg-slate-700/50 flex items-center justify-center cursor-pointer hover:bg-cyan-500/20 hover:text-cyan-400 transition-all duration-300 hover:scale-110 glow-subtle"
-                  onClick={() => window.open(social.href, '_blank', 'noopener,noreferrer')}
-                >
-                  <social.icon className="h-6 w-6 text-gray-400 hover:text-cyan-400" />
-                </div>
-              ))}
-            </div>
-            
-            {/* Copyright */}
-            <div className="border-t border-slate-700/50 pt-8 space-y-2">
-              <p className="text-gray-400 text-lg">
-                © 2025 CuraGenie - Developed by 
-                <span className="text-cyan-400 font-semibold"> Harsh Gupta</span>. 
-                All rights reserved.
-              </p>
-              <p className="text-gray-500 text-sm">
-                Built with cutting-edge technology: React, Next.js, TypeScript & AI/ML
-              </p>
-            </div>
-          </div>
+      {/* Footer */}
+<footer className="py-20 px-6 bg-slate-900/95 backdrop-blur-xl border-t border-white/10 relative">
+  <div className="container mx-auto">
+
+    {/* Top Grid */}
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+      {/* Brand Section */}
+      <div className="space-y-6">
+        <div className="flex items-center space-x-3">
+          <Brain className="h-10 w-10 text-cyan-400" />
+          <span className="text-2xl font-bold text-white">CuraGenie</span>
         </div>
-      </footer>
+
+        <p className="text-gray-400 text-sm leading-relaxed">
+          Transforming healthcare with AI-powered diagnostics, real-time monitoring,
+          and personalized insights for a smarter medical future.
+        </p>
+
+        <div className="flex space-x-4">
+          {[
+            { icon: Mail, link: "mailto:guptasecularharsh@gmail.com" },
+            { icon: Phone, link: "tel:+918081434149" },
+            { icon: Linkedin, link: "https://linkedin.com/in/harsh-gupta-kiet/" }
+          ].map((item, i) => (
+            <div
+              key={i}
+              onClick={() => window.open(item.link, "_blank")}
+              className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center cursor-pointer hover:bg-cyan-500/20 hover:scale-110 transition-all duration-300"
+            >
+              <item.icon className="h-5 w-5 text-gray-400 hover:text-cyan-400" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Quick Links */}
+      <div>
+        <h4 className="text-white font-semibold mb-6 text-lg">Quick Links</h4>
+        <ul className="space-y-3 text-gray-400">
+          {[
+            { label: "Home", id: "home" },
+            { label: "Features", id: "features" },
+            { label: "Services", id: "services" },
+            { label: "About", id: "stats" },
+            { label: "Contact", id: "contact" }
+          ].map((item, i) => (
+            <li
+              key={i}
+              onClick={() => scrollToSection(item.id)}
+              className="cursor-pointer hover:text-cyan-400 transition-all duration-300 hover:translate-x-1"
+            >
+              {item.label}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Platform */}
+      <div>
+        <h4 className="text-white font-semibold mb-6 text-lg">Platform</h4>
+        <ul className="space-y-3 text-gray-400">
+          {[
+            "AI Diagnostics",
+            "Health Dashboard",
+            "Real-time Monitoring",
+            "Mobile App",
+            "Security & Privacy"
+          ].map((item, i) => (
+            <li
+              key={i}
+              className="cursor-pointer hover:text-cyan-400 transition-all duration-300 hover:translate-x-1"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Newsletter */}
+      <div>
+        <h4 className="text-white font-semibold mb-6 text-lg">Stay Updated</h4>
+
+        <p className="text-gray-400 text-sm mb-4">
+          Get product updates and healthcare insights directly to your inbox.
+        </p>
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            const email = new FormData(e.currentTarget).get("email")
+            toast.success("Subscribed successfully!", {
+              description: `${email} added to newsletter`,
+            })
+            e.currentTarget.reset()
+          }}
+          className="flex"
+        >
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="Enter email"
+            className="w-full px-4 py-3 rounded-l-xl bg-slate-800 border border-slate-700 text-white placeholder-gray-400 focus:outline-none focus:border-cyan-400"
+          />
+          <button
+            type="submit"
+            className="px-4 bg-cyan-500 hover:bg-cyan-400 rounded-r-xl transition-all duration-300"
+          >
+            <ArrowRight className="h-5 w-5 text-white" />
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    {/* Bottom Section */}
+    <div className="border-t border-slate-700/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+
+      <p className="text-gray-400 text-sm text-center md:text-left">
+        © 2025 CuraGenie. All rights reserved.
+      </p>
+
+      <div className="flex gap-6 text-sm text-gray-400">
+        <span className="hover:text-cyan-400 cursor-pointer">Privacy Policy</span>
+        <span className="hover:text-cyan-400 cursor-pointer">Terms of Service</span>
+        <span className="hover:text-cyan-400 cursor-pointer">Security</span>
+      </div>
+
+    </div>
+  </div>
+</footer>
 
       {/* Custom Styles */}
       <style jsx global>{`
@@ -982,6 +1228,87 @@ export default function LandingPage() {
         ::-webkit-scrollbar-thumb:hover {
           background: rgba(34, 211, 238, 0.7);
         }
+
+
+        /* ===== FOOTER ENHANCEMENTS ===== */
+
+/* Subtle gradient border line */
+      footer {
+        position: relative;
+      }
+
+      footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 10%;
+        width: 80%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, rgba(34,211,238,0.6), transparent);
+      }
+
+      /* Hover glow for links */
+      footer ul li {
+        position: relative;
+      }
+
+      footer ul li::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0%;
+        height: 1px;
+        background: #22d3ee;
+        transition: width 0.3s ease;
+      }
+
+      footer ul li:hover::after {
+       width: 100%;
+      }
+
+      /* Social icon glow */
+      footer .social-icon {
+        box-shadow: 0 0 0px rgba(34,211,238,0);
+      }
+
+      footer .social-icon:hover {
+        box-shadow: 0 0 15px rgba(34,211,238,0.5);
+    }
+
+      /* Newsletter input focus glow */
+      footer input:focus {
+      box-shadow: 0 0 10px rgba(34,211,238,0.3);
+      }
+
+    /* Button hover glow */
+      footer button:hover {
+      box-shadow: 0 0 15px rgba(34,211,238,0.5);
+    }
+
+/* Smooth fade-in animation */
+    @keyframes footer-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+
+    footer {
+      animation: footer-fade-in 0.8s ease-out;
+    }
+
+      /* Better mobile spacing */
+    @media (max-width: 768px) {
+      footer {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    }
       `}</style>
     </div>
   )
